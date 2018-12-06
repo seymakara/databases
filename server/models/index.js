@@ -1,12 +1,23 @@
 var db = require('../db');
+var con = require('../db/index.js').con
+
+//This file talks to the database
 
 module.exports = {
   messages: {
-    get: function () {}, // a function which produces all the messages
-    post: function () {} // a function which can be used to insert a message into the database
+    // Gets all requests from server
+    get: function () {},
+    // Posts messages to database
+    post: function () {}
   },
 
   users: {
+    // Ditto as above.
+    get: function () {},
+    post: function () {}
+  },
+
+  rooms: {
     // Ditto as above.
     get: function () {},
     post: function () {}

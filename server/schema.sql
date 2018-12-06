@@ -2,8 +2,38 @@ CREATE DATABASE chat;
 
 USE chat;
 
+CREATE TABLE users (
+  id INT NOT NULL AUTO_INCREMENT,
+  username TEXT,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE rooms (
+  id INT NOT NULL AUTO_INCREMENT,
+  roomname TEXT,
+  PRIMARY KEY (id)
+);
+
 CREATE TABLE messages (
-  /* Describe your table here.*/
+  id INT AUTO_INCREMENT,
+  message TEXT,
+  createdAt TIMESTAMP,
+  room_id INT NOT NULL,
+  user_id INT NOT NULL,
+  PRIMARY KEY (id),
+  -- KEY fk_room(room_id),
+  -- KEY fk_user(user_id),
+
+
+    FOREIGN KEY fk_room (room_id)
+      REFERENCES rooms(id)
+      ON UPDATE CASCADE 
+      ON DELETE CASCADE,
+
+    FOREIGN KEY fk_user (user_id)
+      REFERENCES users(id)
+      ON UPDATE CASCADE 
+      ON DELETE CASCADE
 );
 
 /* Create other tables and define schemas for them here! */
@@ -12,6 +42,6 @@ CREATE TABLE messages (
 
 
 /*  Execute this file from the command line by typing:
- *    mysql -u root < server/schema.sql
+ *    mysql -u student < server/schema.sql
  *  to create the database and the tables.*/
 
