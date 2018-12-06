@@ -1,17 +1,25 @@
 var models = require('../models');
 
-// Here, we're talking to our server & client
 
 module.exports = {
   messages: {
-    // Gets request from client and response from server
+    // GET request
     get: function (req, res) {
-      
-    }, // a function which handles a get request for all messages
-    // Gets request from client and response from server
+      models.messages.get((err, dataset) => {
+        // console.log('within controller.messages.get', dataset);
+        if (dataset.length > 0) {
+          res.send({ results: dataset });
+        } else {
+          res.send({results: [{objectId: '1234', username:'system' , text: 'no messages', roomname: 'lobby'}]});
+        }
+      });
+    }, 
+    //POST request
     post: function (req, res) {
+      models.messages.post(req.body, () => {
 
-    } // a function which handles posting a message to the database
+      });
+    } 
   },
 
   users: {

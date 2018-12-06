@@ -15,15 +15,12 @@ CREATE TABLE rooms (
 );
 
 CREATE TABLE messages (
-  id INT AUTO_INCREMENT,
-  message TEXT,
+  objectId INT AUTO_INCREMENT,
+  text TEXT,
   createdAt TIMESTAMP,
   room_id INT NOT NULL,
   user_id INT NOT NULL,
   PRIMARY KEY (id),
-  -- KEY fk_room(room_id),
-  -- KEY fk_user(user_id),
-
 
     FOREIGN KEY fk_room (room_id)
       REFERENCES rooms(id)
