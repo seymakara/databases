@@ -5,39 +5,48 @@ var con = require('../db/index.js').con
 
 module.exports = {
   messages: {
-    // Gets all requests from server
     get: function (callback) {
-      // console.log(con)
-      con.connect(err => {
-        if (err) throw err;
         con.query('SELECT * FROM messages', (err, result) => {
           if (err) throw err;
+          console.log()
           callback(null, result);
         });
-      })
     },
-    // Posts messages to database
     post: function (msgObj, callback) {
-      con.connect(err => {
+      var username = msgObj.username;
+      var roomname = msgObj.roomname;
+      var text = msgObj.text;
+      con.query(`INSERT INTO messages (text, username, roomname) VALUES ('${text}', '${username}', '${roomname}')`, (err, result) => {
         if (err) throw err;
-        con.query(`INSERT REPLACE INTO messages (message) VALUES (${msgObj});`, (err, result) => {
-          if (err) throw err;
-          callback(null, result);
-        });
-      })
+        con.query('SELECT * FROM messages', (err, allMsg) => {
+          console.log("ALL MESSAGES", allMsg)
+          callback(null, allMsg);
+        })
+      });
     }
   },
 
   users: {
     // Ditto as above.
-    get: function () {},
-    post: function () {}
+    get: callback => {
+      con.query('SELECT * FROM users', (err, result) => {
+        if (err) {
+          throw err;
+        }
+        callback(null, result);
+      });
+    },
+    post: (msgObj, callback) => {
+      var username = msgObj.username;
+      con.query(`INSERT INTO users (username) VALUES ('${username}')`, (err, result) => {
+        if (err) throw err;
+        con.query('SELECT * FROM users', (err, allMsg) => {
+          if (err) throw err;
+          callback(null, allMsg);
+        });
+      });
+    }
   },
 
-  rooms: {
-    // Ditto as above.
-    get: function () {},
-    post: function () {}
-  }
 };
 

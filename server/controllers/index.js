@@ -16,8 +16,13 @@ module.exports = {
     }, 
     //POST request
     post: function (req, res) {
-      models.messages.post(req.body, () => {
-
+      console.log("REQ BODY", req.body, typeof req.body)
+      models.messages.post(req.body, (err, result) => {
+        if (err) {
+          throw err;
+        } 
+        console.log("RESULTS at controller", result)
+        res.send({results: result});
       });
     } 
   },

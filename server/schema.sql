@@ -18,19 +18,21 @@ CREATE TABLE messages (
   objectId INT AUTO_INCREMENT,
   text TEXT,
   createdAt TIMESTAMP,
-  room_id INT NOT NULL,
-  user_id INT NOT NULL,
-  PRIMARY KEY (id),
+  username TEXT, 
+  roomname TEXT,
+  -- room_id INT NOT NULL,
+  -- user_id INT NOT NULL,
+  PRIMARY KEY (objectId)
 
-    FOREIGN KEY fk_room (room_id)
-      REFERENCES rooms(id)
-      ON UPDATE CASCADE 
-      ON DELETE CASCADE,
+    -- FOREIGN KEY fk_room (room_id)
+    --   REFERENCES rooms(id)
+    --   ON UPDATE CASCADE 
+    --   ON DELETE CASCADE,
 
-    FOREIGN KEY fk_user (user_id)
-      REFERENCES users(id)
-      ON UPDATE CASCADE 
-      ON DELETE CASCADE
+    -- FOREIGN KEY fk_user (user_id)
+    --   REFERENCES users(id)
+    --   ON UPDATE CASCADE 
+    --   ON DELETE CASCADE
 );
 
 /* Create other tables and define schemas for them here! */

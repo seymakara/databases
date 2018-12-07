@@ -8,7 +8,8 @@ var Messages = {
   },
 
   add: function(message, callback = ()=>{}) {
-    Messages._data[message.objectId] = message;
+    let conformed = this._conform(message);
+    Messages._data[message.objectId] = conformed;
     callback(Messages.items());
   },
 

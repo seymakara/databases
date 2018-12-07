@@ -3,7 +3,7 @@ var Rooms = {
 
   _data: new Set,
 
-  selected: 'lobby',
+  selected: 'oh no!',
 
   items: function() {
     return _.chain([...Rooms._data]);
@@ -11,7 +11,7 @@ var Rooms = {
 
   isSelected: function(roomname) {
     return roomname === Rooms.selected ||
-           !roomname && Rooms.selected === 'lobby';
+           !roomname && Rooms.selected === 'oh no!';
   },
 
   add: function(room, callback = ()=>{}) {
